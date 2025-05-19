@@ -203,31 +203,12 @@ https://github.com/user-attachments/assets/e19b9570-a878-49fe-b7c7-a91680e52dd9
 ---
 
 ## 📊 바 차트: 실제 거리 vs 측정 거리
+![Image](https://github.com/user-attachments/assets/4ab831d1-27ef-4248-96a4-bd0d8a4a5e6f)
 
-![Distance Comparison Chart](https://raw.githubusercontent.com/yourusername/yourrepo/main/chart.png)
+## 느낀점 📝
 
----
+- 같은 높이에서 초음파 센서를 정면으로 향하게 한 경우에는 거리 측정이 비교적 정확하게 이루어졌습니다.
+- 하지만 **센서와 대상 간 높이가 다르거나 각도가 틀어질 경우**, 초음파가 정상적으로 반사되지 않아 **정확한 측정이 어려웠습니다**.
+- 특정 상황에서는 BLE 연결이 일시적으로 끊기면서 갑자기 **5m 이상의 잘못된 거리 값**이 출력되기도 했습니다.
+- 따라서 **센서 설치 각도**와 **높이 정렬**, **주변 반사 환경**을 고려한 보정이 필요하다고 느꼈습니다.
 
-## 📈 바 차트 생성 코드 (Python)
-
-```python
-import matplotlib.pyplot as plt
-
-labels = ['0~1m', '1~2m', '2~3m']
-actual = [0.75, 1.50, 2.50]
-measured = [0.80, 1.45, 2.62]
-
-bar_width = 0.35
-x = range(len(labels))
-
-plt.bar(x, actual, width=bar_width, label='Actual Distance (m)', color='skyblue')
-plt.bar([i + bar_width for i in x], measured, width=bar_width, label='Measured Distance (m)', color='orange')
-
-plt.xlabel('Distance Range')
-plt.ylabel('Distance (m)')
-plt.title('Actual vs Measured Distance (by Range)')
-plt.xticks([i + bar_width / 2 for i in x], labels)
-plt.legend()
-plt.tight_layout()
-plt.savefig("chart.png")
-plt.show()
